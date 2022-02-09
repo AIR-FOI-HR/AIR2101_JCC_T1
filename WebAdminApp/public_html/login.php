@@ -3,6 +3,17 @@
     $directory = getcwd();
     require "./header.php";
 
+    if (isset($_POST['submit']))
+    {
+        $email = $_POST['email'];
+        $password = hash("sha256", $_POST['password']);
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * FROM `user` 
+            WHERE `Email`='{$email}' 
+            AND `Password`='{$password}'";
+        $result = $connection->selectDB($query);
+    }
 ?>
 
 <form method="post" action="login.php">
