@@ -16,9 +16,12 @@ class Session
             session_start();
         }
     }
-    static function createUser()
+    static function createUser($user, $role, $id)
     {
-
+        self::createSession();
+        $_SESSION[self::USER] = $user;
+        $_SESSION[self::ROLE] = $role;
+        $_SESSION[self::ID] = $id;
     }
     static function getUser()
     {
