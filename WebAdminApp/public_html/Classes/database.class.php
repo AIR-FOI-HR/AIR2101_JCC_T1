@@ -8,10 +8,23 @@ class Database
     const database = "jcc";
 
     private $connection = null;
+    private $error = '';
 
     function connectDB()
     {
-
+        $this->connection = new mysqli(self::server, self::user, self::password, self::database);
+        if ($this->connection->connect_errno) {
+            echo "Error while connecting to database: " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
+        }
+        $this->connection->set_charset("utf8");
+        if ($this->connection->connect_errno) {
+            echo "Error while setting charset: " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
+        }
+        return $this->connection;
     }
     function closeDB()
     {
