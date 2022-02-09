@@ -2,6 +2,13 @@
 
 class Database 
 {
+    const server = "localhost";
+    const user = "root";
+    const password = "";
+    const database = "jcc";
+
+    private $connection = null;
+
     function connectDB()
     {
 
@@ -16,7 +23,7 @@ class Database
     }
     function updateDB($query)
     {
-        
+
     }
 }
 
