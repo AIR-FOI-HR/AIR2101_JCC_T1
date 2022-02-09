@@ -1,3 +1,11 @@
+<?php
+
+    require "$directory/Classes/session.class.php";
+    Session::createSession();
+    require "$directory/Classes/database.class.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
