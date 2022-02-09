@@ -38,7 +38,12 @@ class Session
     }
     static function deleteSession()
     {
+        session_name(self::SESSION_NAME);
 
+        if (session_id() != "") {
+            session_unset();
+            session_destroy();
+        }
     }
 }
 
