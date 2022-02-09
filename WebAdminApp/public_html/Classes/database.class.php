@@ -28,7 +28,7 @@ class Database
     }
     function closeDB()
     {
-
+        $this->connection->close();
     }
     function selectDB($query)
     {
