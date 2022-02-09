@@ -25,7 +25,16 @@ class Session
     }
     static function getUser()
     {
-
+        self::createSession();
+        if (isset($_SESSION[self::USER])) 
+        {
+            $user[self::USER] = $_SESSION[self::USER];
+            $user[self::ROLE] = $_SESSION[self::ROLE];
+            $user[self::ID] = $_SESSION[self::ID];
+        } else {
+            return null;
+        }
+        return $user;
     }
     static function deleteSession()
     {
