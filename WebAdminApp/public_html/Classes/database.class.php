@@ -43,9 +43,19 @@ class Database
         }
         return $result;
     }
-    function updateDB($query)
+    function updateDB($query, $script='')
     {
-
+        $result = $this->connection->query($query);
+        if ($this->connection->connect_errno) {
+            echo "Error with query: {$query} - " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
+        } else {
+            if ($script != '') {
+                header("Location: $script");
+            }
+        }
+        return $result;
     }
 }
 
