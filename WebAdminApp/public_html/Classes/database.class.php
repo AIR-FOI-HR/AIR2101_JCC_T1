@@ -32,7 +32,16 @@ class Database
     }
     function selectDB($query)
     {
-
+        $result = $this->connection->query($query);
+        if ($this->connection->connect_errno) {
+            echo "Error with query: {$query} - " . $this->connection->connect_errno . ", " .
+            $this->connection->connect_error;
+            $this->error = $this->connection->connect_error;
+        }
+        if (!$result) {
+            $result = null;
+        }
+        return $result;
     }
     function updateDB($query)
     {
