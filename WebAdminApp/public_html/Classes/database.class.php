@@ -57,6 +57,13 @@ class Database
         }
         return $result;
     }
+    function errorDB() {
+        if ($this->error != '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
