@@ -5,6 +5,7 @@ class Session
     const USER = "user";
     const ROLE = "role";
     const ID = "id";
+    const MUSEUM = "museum";
     const SESSION_NAME = "login";
 
     static function createSession()
@@ -16,12 +17,13 @@ class Session
             session_start();
         }
     }
-    static function createUser($user, $role, $id)
+    static function createUser($user, $role, $id, $museum)
     {
         self::createSession();
         $_SESSION[self::USER] = $user;
         $_SESSION[self::ROLE] = $role;
         $_SESSION[self::ID] = $id;
+        $_SESSION[self::MUSEUM] = $museum;
     }
     static function getUser()
     {
@@ -31,6 +33,7 @@ class Session
             $user[self::USER] = $_SESSION[self::USER];
             $user[self::ROLE] = $_SESSION[self::ROLE];
             $user[self::ID] = $_SESSION[self::ID];
+            $user[self::MUSEUM] = $_SESSION[self::MUSEUM];
         } else {
             return null;
         }
