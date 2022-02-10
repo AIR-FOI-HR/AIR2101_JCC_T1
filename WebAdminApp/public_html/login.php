@@ -13,6 +13,15 @@
             WHERE `Email`='{$email}' 
             AND `Password`='{$password}'";
         $result = $connection->selectDB($query);
+
+        $row = mysqli_fetch_array($result);
+        if ($row)
+        {
+            if ($row['RoleID'] == 1)
+            {
+                Session::createUser($row['Name'], $row['RoleID'], $row['UserID']);
+            }
+        }
     }
 ?>
 
