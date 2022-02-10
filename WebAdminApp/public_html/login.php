@@ -10,9 +10,10 @@
         $password = hash("sha256", $_POST['password']);
         $connection = new Database();
         $connection->connectDB();
-        $query = "SELECT * FROM `user` 
-            WHERE `Email`='{$email}' 
-            AND `Password`='{$password}'";
+        $query = "SELECT * FROM `admin` a,`user` u 
+        WHERE u.Email='{$email}' 
+        AND u.Password='{$password}'
+        AND a.UserID = u.UserID";
         $result = $connection->selectDB($query);
 
         $row = mysqli_fetch_array($result);
@@ -20,7 +21,7 @@
         {
             if ($row['RoleID'] == 1)
             {
-                Session::createUser($row['Name'], $row['RoleID'], $row['UserID']);
+                Session::createUser($row['Name'], $row['RoleID'], $row['UserID'], $row['MuseumID']);
                 header("Location: ./index.php");
             }
             else
