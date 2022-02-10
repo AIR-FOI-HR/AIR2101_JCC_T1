@@ -1,7 +1,7 @@
 <?php
 
     require "$directory/Classes/session.class.php";
-    Session::createSession();
+    $user = Session::getUser();
     require "$directory/Classes/database.class.php";
 
 ?>
