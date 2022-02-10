@@ -17,5 +17,6 @@
         <nav>
             <ul>
                 <li><a href="./index.php">Index</a></li>
+                <li><a href="./login.php">Login</a></li>
             </ul>
         </nav>
