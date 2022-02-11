@@ -19,10 +19,19 @@
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
+            $arttype = "";
+
+            $query = "SELECT *
+                FROM `arttype` 
+                WHERE ArtTypeID=".$row['ArtTypeID'];
+            $result2 = $connection->selectDB($query);
+            $row2 = mysqli_fetch_array($result2);
+            if ($row2) $arttype=$row2['Name'];
+
             echo "<tr>
                 <td>".$row['Name']."</td>
                 <td>".$row['Author']."</td>
-                <td>".$row['ArtTypeID']."</td>
+                <td>".$arttype."</td>
                 <td>".$row['Description']."</td>
                 <td>".$row['Photo']."</td>
                 <td><a href=\"./newartwork.php?id=".$row['ArtID']."\">Update</a></td>
