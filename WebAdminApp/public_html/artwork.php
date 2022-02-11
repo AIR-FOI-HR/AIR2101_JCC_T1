@@ -25,6 +25,8 @@
                 <td>".$row['ArtTypeID']."</td>
                 <td>".$row['Description']."</td>
                 <td>".$row['Photo']."</td>
+                <td><a href=\"\">Update</a></td>
+                <td><a href=\"\">Delete</a></td>
             </tr>";
         }
         $connection->closeDB();
@@ -39,6 +41,8 @@
         <th>Art Type</th>
         <th>Description</th>
         <th>Photo</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     <?php printArtwork()?>
 </table>
