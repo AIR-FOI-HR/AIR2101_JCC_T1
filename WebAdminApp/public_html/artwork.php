@@ -25,7 +25,7 @@
                 <td>".$row['ArtTypeID']."</td>
                 <td>".$row['Description']."</td>
                 <td>".$row['Photo']."</td>
-                <td><a href=\"\">Update</a></td>
+                <td><a href=\"./newartwork.php?id=".$row['ArtID']."\">Update</a></td>
                 <td><a href=\"\">Delete</a></td>
             </tr>";
         }
