@@ -24,6 +24,20 @@
         $result = $connection->updateDB($query);
         $connection->closeDB();
     }
+
+    function printArtTypes()
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+            FROM `arttype`";
+        $result = $connection->selectDB($query);
+        while ($row = mysqli_fetch_array($result))
+        {
+            echo "<option value=\"".$row['ArtTypeID']."\">".$row['Name']."</option>";
+        }
+        $connection->closeDB();
+    }
 ?>
 
 <form method="post" action="newartwork.php">
@@ -35,7 +49,7 @@
 
     <label for="arttype">Art Type: </label>
     <select id="arttype" name="arttype">
-        <option value="1" selected>Test</option>
+        <?php printArtTypes(); ?>
     </select><br>
 
     <label for="description">Description: </label>
