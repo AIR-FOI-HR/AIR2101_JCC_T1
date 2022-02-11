@@ -9,12 +9,15 @@
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
     
-    $_POST['name'] = "";
-    $_POST['author'] = "";
-    $_POST['arttype'] = 1;
-    $_POST['description'] = "";
-    $_POST['photo'] = "";
-    if (isset($_GET['id']))
+    if (!isset($_POST['submit']))
+    {
+        $_POST['name'] = "";
+        $_POST['author'] = "";
+        $_POST['arttype'] = 1;
+        $_POST['description'] = "";
+        $_POST['photo'] = "";
+    }
+    if (isset($_GET['id']) && !isset($_POST['submit']))
     {
         $connection = new Database();
         $connection->connectDB();
@@ -38,14 +41,28 @@
     {
         $connection = new Database();
         $connection->connectDB();
-        $query = "INSERT INTO `art` 
-        VALUES (DEFAULT, 
-        '".$_POST['name']."', 
-        '".$_POST['author']."', 
-        '".$GLOBALS['museumID']."', 
-        '".$_POST['arttype']."', 
-        '".$_POST['description']."', 
-        '".$_POST['photo']."')";
+        $query = "";
+        if (isset($_GET['id']))
+        {
+            $query = "UPDATE `art` 
+            SET `Name`='".$_POST['name']."', 
+            `Author`='".$_POST['author']."', 
+            `ArtTypeID`='".$_POST['arttype']."', 
+            `Description`='".$_POST['description']."', 
+            `Photo`='".$_POST['photo']."'
+             WHERE ArtID=".$_GET['id'];
+        }
+        else
+        {
+            $query = "INSERT INTO `art` 
+                VALUES (DEFAULT, 
+                '".$_POST['name']."', 
+                '".$_POST['author']."', 
+                '".$GLOBALS['museumID']."', 
+                '".$_POST['arttype']."', 
+                '".$_POST['description']."', 
+                '".$_POST['photo']."')";
+        }
         $result = $connection->updateDB($query);
         $connection->closeDB();
     }
@@ -67,7 +84,7 @@
     }
 ?>
 
-<form method="post" action="newartwork.php">
+<form method="post" action="">
     <label for="name">Name: </label>
     <input id="name" name="name" type="text" placeholder="Name" autofocus value="<?php if (!empty($_POST['name'])) echo $_POST['name'] ?>"/><br>
 
