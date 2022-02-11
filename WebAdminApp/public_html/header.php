@@ -18,5 +18,6 @@
             <ul>
                 <li><a href="./index.php">Index</a></li>
                 <li><a href="./login.php">Login</a></li>
+                <li><a href="./artwork.php">Artwork</a></li>
             </ul>
         </nav>
