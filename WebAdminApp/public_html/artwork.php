@@ -27,9 +27,11 @@
                 <td>".$row['Photo']."</td>
             </tr>";
         }
+        $connection->closeDB();
     }
 ?>
 
+<a href="./newartwork.php">New artwork</a>
 <table>
     <tr>
         <th>Name</th>
