@@ -26,7 +26,7 @@
                 <td>".$row['Description']."</td>
                 <td>".$row['Photo']."</td>
                 <td><a href=\"./newartwork.php?id=".$row['ArtID']."\">Update</a></td>
-                <td><a href=\"\">Delete</a></td>
+                <td><a href=\"./deleteartwork.php?id=".$row['ArtID']."\">Delete</a></td>
             </tr>";
         }
         $connection->closeDB();
