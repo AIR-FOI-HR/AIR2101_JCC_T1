@@ -7,6 +7,23 @@
     {
         header("Location: ./login.php");
     }
+    $GLOBALS['museumID'] = $user[Session::MUSEUM];
+
+    if (isset($_POST['submit']))
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "INSERT INTO `art` 
+        VALUES (DEFAULT, 
+        '".$_POST['name']."', 
+        '".$_POST['author']."', 
+        '".$GLOBALS['museumID']."', 
+        '".$_POST['arttype']."', 
+        '".$_POST['description']."', 
+        '".$_POST['photo']."')";
+        $result = $connection->updateDB($query);
+        $connection->closeDB();
+    }
 ?>
 
 <form method="post" action="newartwork.php">
@@ -18,7 +35,7 @@
 
     <label for="arttype">Art Type: </label>
     <select id="arttype" name="arttype">
-        
+        <option value="1" selected>Test</option>
     </select><br>
 
     <label for="description">Description: </label>
@@ -26,6 +43,8 @@
 
     <label for="photo">Photo: </label>
     <input id="photo" name="photo" type="text" placeholder="Photo"/><br>
+
+    <input name="submit" type="submit" value="Add artwork"/>
 </form>
 
 <?php
