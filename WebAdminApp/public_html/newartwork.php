@@ -8,6 +8,31 @@
         header("Location: ./login.php");
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
+    
+    $_POST['name'] = "";
+    $_POST['author'] = "";
+    $_POST['arttype'] = 1;
+    $_POST['description'] = "";
+    $_POST['photo'] = "";
+    if (isset($_GET['id']))
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+            FROM `art` 
+            WHERE ArtID=".$_GET['id'];
+        $result = $connection->selectDB($query);
+        if ($row = mysqli_fetch_array($result))
+        {
+            $_POST['name'] = $row['Name'];
+            $_POST['author'] = $row['Author'];
+            $_POST['arttype'] = $row['ArtTypeID'];
+            $_POST['description'] = $row['Description'];
+            $_POST['photo'] = $row['Photo'];
+        }
+        $connection->closeDB();
+    }
+
 
     if (isset($_POST['submit']))
     {
@@ -34,7 +59,9 @@
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
-            echo "<option value=\"".$row['ArtTypeID']."\">".$row['Name']."</option>";
+            echo "<option value=\"".$row['ArtTypeID']."\" ";
+            if ($_POST['arttype'] == $row['ArtTypeID']) echo "selected";
+            echo">".$row['Name']."</option>";
         }
         $connection->closeDB();
     }
@@ -42,10 +69,10 @@
 
 <form method="post" action="newartwork.php">
     <label for="name">Name: </label>
-    <input id="name" name="name" type="text" placeholder="Name" autofocus/><br>
+    <input id="name" name="name" type="text" placeholder="Name" autofocus value="<?php if (!empty($_POST['name'])) echo $_POST['name'] ?>"/><br>
 
     <label for="author">Author: </label>
-    <input id="author" name="author" type="text" placeholder="Author"/><br>
+    <input id="author" name="author" type="text" placeholder="Author" value="<?php if (!empty($_POST['author'])) echo $_POST['author'] ?>"/><br>
 
     <label for="arttype">Art Type: </label>
     <select id="arttype" name="arttype">
@@ -53,10 +80,10 @@
     </select><br>
 
     <label for="description">Description: </label>
-    <input id="description" name="description" type="text" placeholder="Description"/><br>
+    <input id="description" name="description" type="text" placeholder="Description" value="<?php if (!empty($_POST['description'])) echo $_POST['description'] ?>"/><br>
 
     <label for="photo">Photo: </label>
-    <input id="photo" name="photo" type="text" placeholder="Photo"/><br>
+    <input id="photo" name="photo" type="text" placeholder="Photo" value="<?php if (!empty($_POST['photo'])) echo $_POST['photo'] ?>"/><br>
 
     <input name="submit" type="submit" value="Add artwork"/>
 </form>
