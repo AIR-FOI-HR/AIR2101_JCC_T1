@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "JCCT1_Android_App"
 include ':app'
 include ':ws'
+include ':core'
