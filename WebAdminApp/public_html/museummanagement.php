@@ -52,7 +52,7 @@
             if ($row['TurnedOn'] == 1) echo "On";
             else echo "Off";
             echo "</td>
-                <td><a href=\"\">Change</a></td>
+                <td><a href=\"./changecomponentstate.php?id=".$row['ComponentID']."\">Change</a></td>
                 <td><a href=\"./newcomponent.php?id=".$row['ComponentID']."\">Update</a></td>
                 <td><a href=\"./deletecomponent.php?id=".$row['ComponentID']."\">Delete</a></td>
             </tr>";
