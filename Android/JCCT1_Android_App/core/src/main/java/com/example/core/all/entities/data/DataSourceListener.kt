@@ -1,5 +1,5 @@
-package com.example.core.all
-import com.example.core.all.entities.Museum
+package com.example.core.all.entities.data
+import com.example.core.all.entities.entities.Museum
 
 interface DataSourceListener {
     fun onDataLoaded(museums: List<Museum>?)

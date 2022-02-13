@@ -4,7 +4,7 @@ import com.example.ws.handlers.MyWebserviceHandler
 import com.example.ws.responses.MyWebserviceResponse
 import com.google.gson.Gson
 import com.squareup.okhttp.OkHttpClient
-import com.example.core.all.entities.Museum
+import com.example.core.all.entities.entities.Museum
 import retrofit.*
 
 class MyWebserviceCaller {

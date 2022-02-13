@@ -1,6 +1,6 @@
 package com.example.ws
 
-import com.example.core.DataSource
+import com.example.core.
 
 class WsDataSource : DataSource{
 

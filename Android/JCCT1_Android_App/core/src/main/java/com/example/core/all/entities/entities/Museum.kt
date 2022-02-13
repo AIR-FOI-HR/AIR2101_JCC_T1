@@ -1,4 +1,4 @@
-package com.example.core.all.entities
+package com.example.core.all.entities.entities
 
 open class Museum (
     open var museumId : Int? = null,

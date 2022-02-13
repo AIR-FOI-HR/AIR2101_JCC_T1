@@ -1,6 +1,6 @@
-package com.example.core.all
+package com.example.core.all.entities.data
 import android.content.Context
 
 interface DataSource {
-    fun loadData(dataSourceListener: DataSourceListener, context: Context)
+    fun loadData(dataSourceListener: com.example.core.all.entities.data.DataSourceListener, context: Context)
 }
