@@ -1,3 +1,4 @@
+package com.example.core.all
 import android.content.Context
 
 interface DataSource {
