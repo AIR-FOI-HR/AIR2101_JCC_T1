@@ -19,5 +19,6 @@
                 <li><a href="./index.php">Index</a></li>
                 <li><a href="./login.php">Login</a></li>
                 <li><a href="./artwork.php">Artwork</a></li>
+                <li><a href="./museummanagement.php">Museum Management</a></li>
             </ul>
         </nav>
