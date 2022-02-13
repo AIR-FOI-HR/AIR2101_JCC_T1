@@ -63,7 +63,8 @@
 
 Museum:<br>
 <?php printMuseumDetails(); ?>
-
+<br>
+<a href="./newcomponent.php">New Component</a>
 <table>
     <tr>
         <th>Name</th>
