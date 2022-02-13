@@ -53,7 +53,7 @@
             else echo "Off";
             echo "</td>
                 <td><a href=\"\">Change</a></td>
-                <td><a href=\"\">Update</a></td>
+                <td><a href=\"./newcomponent.php?id=".$row['ComponentID']."\">Update</a></td>
                 <td><a href=\"\">Delete</a></td>
             </tr>";
         }

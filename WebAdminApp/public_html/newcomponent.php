@@ -14,6 +14,23 @@
         $_POST['name'] = "";
         $_POST['comptype'] = 1;
     }
+    if (isset($_GET['id']) && !isset($_POST['submit']))
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+            FROM `component` 
+            WHERE ComponentID=".$_GET['id'];
+        $result = $connection->selectDB($query);
+        if ($row = mysqli_fetch_array($result))
+        {
+            $_POST['name'] = $row['Name'];
+            $_POST['comptype'] = $row['CompTypeID'];
+            if ($row['TurnedOn'] == 1) $_POST['turnedon'] = "on";
+            else unset($_POST['turnedon']);
+        }
+        $connection->closeDB();
+    }
 
     if (isset($_POST['submit']))
     {
@@ -22,7 +39,14 @@
         $query = "";
         if (isset($_GET['id']))
         {
-            
+            $query = "UPDATE `component` 
+            SET `Name`='".$_POST['name']."', 
+            `CompTypeID`='".$_POST['comptype']."', 
+            `TurnedOn`='";
+            if (isset($_POST['turnedon'])) $query .= "1";
+            else $query .= "0";
+            $query .="' 
+            WHERE ComponentID=".$_GET['id'];
         }
         else
         {
