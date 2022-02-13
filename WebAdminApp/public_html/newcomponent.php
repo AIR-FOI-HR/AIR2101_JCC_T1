@@ -15,6 +15,32 @@
         $_POST['comptype'] = 1;
     }
 
+    if (isset($_POST['submit']))
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "";
+        if (isset($_GET['id']))
+        {
+            
+        }
+        else
+        {
+            $query = "INSERT INTO `component` 
+                VALUES (DEFAULT, 
+                '".$_POST['name']."', 
+                '".$_POST['comptype']."', 
+                '".$GLOBALS['museumID']."', 
+                '";
+            if (isset($_POST['turnedon'])) $query .= "1";
+            else $query .= "0";
+            $query .= "')";
+        }
+        $result = $connection->updateDB($query);
+        $connection->closeDB();
+        header("Location: ./museummanagement.php");
+    }
+
     function printCompTypes()
     {
         $connection = new Database();
@@ -42,7 +68,7 @@
     </select><br>
 
     <label for="turnedon">Turned On: </label>
-    <input id="turnedon" name="turnedon" type="checkbox" <?php if (!empty($_POST['turnedon'])) echo "checked" ?>/><br>
+    <input id="turnedon" name="turnedon" type="checkbox" <?php if (isset($_POST['turnedon'])) echo "checked" ?>/><br>
 
     <input name="submit" type="submit" value="Add component"/>
 </form>
