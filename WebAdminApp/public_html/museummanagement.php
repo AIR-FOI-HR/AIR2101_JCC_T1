@@ -54,7 +54,7 @@
             echo "</td>
                 <td><a href=\"\">Change</a></td>
                 <td><a href=\"./newcomponent.php?id=".$row['ComponentID']."\">Update</a></td>
-                <td><a href=\"\">Delete</a></td>
+                <td><a href=\"./deletecomponent.php?id=".$row['ComponentID']."\">Delete</a></td>
             </tr>";
         }
         $connection->closeDB();
