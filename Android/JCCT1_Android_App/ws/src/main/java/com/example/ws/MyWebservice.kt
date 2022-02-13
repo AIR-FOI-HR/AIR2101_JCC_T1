@@ -2,12 +2,13 @@ package com.example.ws
 
 import retrofit.http.Field
 import retrofit.http.FormUrlEncoded
+import retrofit.http.GET
 import retrofit.http.POST
 
 interface MyWebservice {
 
-    @FormUrlEncoded
-    @POST("museums.php")
+
+    @GET("museums")
     fun getAllMuseumsCaller(@Field(method) method: String) : Call<MyWebserviceResponse>
 
 }
