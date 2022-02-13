@@ -1,5 +1,7 @@
 package com.example.ws
 
+import android.telecom.Call
+import com.example.ws.responses.MyWebserviceResponse
 import retrofit.http.Field
 import retrofit.http.FormUrlEncoded
 import retrofit.http.GET
@@ -9,6 +11,6 @@ interface MyWebservice {
 
 
     @GET("museums")
-    fun getAllMuseumsCaller(@Field(method) method: String) : Call<MyWebserviceResponse>
+    fun getAllMuseumsCaller(@Field("method") method: String) : retrofit.Call<MyWebserviceResponse>
 
 }
