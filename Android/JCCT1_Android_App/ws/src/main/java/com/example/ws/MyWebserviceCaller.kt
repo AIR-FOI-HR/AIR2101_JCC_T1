@@ -9,7 +9,7 @@ import retrofit.*
 
 class MyWebserviceCaller {
     var retrofit : Retrofit? = null
-    val baseUrl : String = "http://localhost/phpmyadmin/index.php?route=/table/structure&db=jcc_baza&table=museum"
+    val baseUrl : String = ""
 
     constructor(){
         val client: OkHttpClient = OkHttpClient()
@@ -21,7 +21,7 @@ class MyWebserviceCaller {
             .build()
     }
 
-    fun getAllStores(method: String, dataArrivedHandler: MyWebserviceHandler)
+    fun getAllMuseums(method: String, dataArrivedHandler: MyWebserviceHandler)
     {
         val serviceCaller: MyWebservice? = retrofit?.create(MyWebservice::class.java)
         var call: Call<MyWebserviceResponse>? = null

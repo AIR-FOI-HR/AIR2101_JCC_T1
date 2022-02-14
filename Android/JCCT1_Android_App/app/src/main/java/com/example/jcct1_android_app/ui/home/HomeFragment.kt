@@ -8,11 +8,18 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.R
 import com.example.jcct1_android_app.databinding.FragmentHomeBinding
+import com.example.jcct1_android_app.recyclerview.MuseumParent
+import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
 
 class HomeFragment : Fragment() {
 
+    private var viewReadyFlag: Boolean = false
+    private var dataReadyFlag: Boolean = false
+    private var museums: List<Museum>? = null
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
@@ -37,6 +44,42 @@ class HomeFragment : Fragment() {
         })
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewReadyFlag = true
+        tryToDisplayData()
+
+    }
+
+
+
+    fun onDataLoaded(museums: List<Museum>?) {
+        this.museums = museums
+        dataReadyFlag = true
+        tryToDisplayData()
+    }
+
+
+    private fun tryToDisplayData() {
+        if (dataReadyFlag && viewReadyFlag)
+        {
+            if (museums != null) {
+                val parentList : ArrayList<MuseumParent> = ArrayList()
+            //    for (s in stores!!)
+            //        parentList.add(StoreParent(s, discounts!!))
+
+                //prikaz podataka
+                binding.mainRecycler.adapter = MuseumRecyclerAdapter(requireContext(), parentList)
+                binding.mainRecycler.layoutManager = LinearLayoutManager(context)
+
+                //hiding empty message
+              //  if (museums!!.isNotEmpty())
+              //      binding.emptyMessage.isVisible = false
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

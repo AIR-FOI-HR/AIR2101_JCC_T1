@@ -19,18 +19,20 @@ class WsDataSource : DataSource {
 
         val museumCaller: MyWebserviceCaller = MyWebserviceCaller()
 
-        museumCaller.getAllStores("getAll", storeHandler)
+        museumCaller.getAllStores("getAll", museumHandler)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private val storeHandler: MyWebserviceHandler = object : MyWebserviceHandler{
-        override fun <T> onDataArrived(result: List<T>, ok: Boolean, timeStamp: Long?) {
+    private val museumHandler: MyWebserviceHandler = object : MyWebserviceHandler{
+         override fun <T> onDataArrived(result: List<T>, ok: Boolean) {
             if(ok){
                 museums = result as List<Museum>
             }
             museumsArrived = true
             checkDataArrival()
         }
+
+
 
     }
 
@@ -39,4 +41,5 @@ class WsDataSource : DataSource {
             listener?.onDataLoaded(museums)
         }
 
+    }
 }

@@ -11,4 +11,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="logout_text">Logout</string>
+    <string name="store_image">Museum image</string>
+    <string name="store_name">Store name</string>
+    <string name="store_desc">Random description of a museum</string>
 </resources>
