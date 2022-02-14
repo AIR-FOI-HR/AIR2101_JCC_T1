@@ -3,6 +3,8 @@ package com.example.jcct1_android_app.repository
 import android.content.Context
 import com.example.core.all.entities.entities.Museum
 import com.example.ws.WsDataSource
+import  com.example.core.all.entities.data.DataSource
+import com.example.core.all.entities.data.DataSourceListener
 
 class DataRepository {
     fun loadData(context : Context, listener : LoadDataListener)
