@@ -19,7 +19,7 @@ class WsDataSource : DataSource {
 
         val museumCaller: MyWebserviceCaller = MyWebserviceCaller()
 
-        museumCaller.getAllStores("getAll", museumHandler)
+        museumCaller.getAllMuseums("getAll", museumHandler)
     }
 
     @Suppress("UNCHECKED_CAST")

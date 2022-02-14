@@ -19,8 +19,8 @@ class DiscountViewHolder: ChildViewHolder<Museum> {
     }
 
     public fun bindDataToView(discount: Museum){
-        museumName?.text = discount.name
-        museumDesc?.text = discount.layout
-        museumValue?.text = (discount.mail).toString()
+        museumName?.text = discount.Name
+        museumDesc?.text = discount.Layout
+        museumValue?.text = (discount.Email).toString()
     }
 }

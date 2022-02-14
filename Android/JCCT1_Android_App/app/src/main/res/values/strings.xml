@@ -14,4 +14,5 @@
     <string name="store_image">Museum image</string>
     <string name="store_name">Store name</string>
     <string name="store_desc">Random description of a museum</string>
+    <string name="no_data">No data!</string>
 </resources>

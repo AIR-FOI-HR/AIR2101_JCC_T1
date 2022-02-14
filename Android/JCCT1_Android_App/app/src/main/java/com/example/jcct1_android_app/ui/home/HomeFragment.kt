@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -66,16 +67,16 @@ class HomeFragment : Fragment() {
         {
             if (museums != null) {
                 val parentList : ArrayList<MuseumParent> = ArrayList()
-            //    for (s in stores!!)
-            //        parentList.add(StoreParent(s, discounts!!))
+                for (s in museums!!)
+                    parentList.add(MuseumParent(s, museums!!))
 
                 //prikaz podataka
                 binding.mainRecycler.adapter = MuseumRecyclerAdapter(requireContext(), parentList)
                 binding.mainRecycler.layoutManager = LinearLayoutManager(context)
 
-                //hiding empty message
-              //  if (museums!!.isNotEmpty())
-              //      binding.emptyMessage.isVisible = false
+                //   hiding empty message
+                if (museums!!.isNotEmpty())
+                    binding.emptyMessage.isVisible = false
             }
         }
     }

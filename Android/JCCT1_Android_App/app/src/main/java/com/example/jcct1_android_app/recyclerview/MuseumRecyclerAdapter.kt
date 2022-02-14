@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter
 import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.R

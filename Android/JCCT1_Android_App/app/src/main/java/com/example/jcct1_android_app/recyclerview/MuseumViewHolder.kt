@@ -16,8 +16,8 @@ class MuseumViewHolder(@NotNull itemView : View ) : ParentViewHolder<MuseumParen
 
     fun bindDataToView(museum: Museum)
     {
-        museumName?.text = museum.name
-        museumDesc?.text = museum.layout
+        museumName?.text = museum.Name
+        museumDesc?.text = museum.Layout
       //  Picasso.with(itemView.context).load(museum.imgUrl).into(storeImage)
     }
 

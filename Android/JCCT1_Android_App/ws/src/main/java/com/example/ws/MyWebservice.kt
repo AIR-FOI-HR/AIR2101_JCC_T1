@@ -10,7 +10,7 @@ import retrofit.http.POST
 interface MyWebservice {
 
 
-    @GET("museums")
+    @GET("museum")
     fun getAllMuseumsCaller(@Field("method") method: String) : retrofit.Call<MyWebserviceResponse>
 
 }

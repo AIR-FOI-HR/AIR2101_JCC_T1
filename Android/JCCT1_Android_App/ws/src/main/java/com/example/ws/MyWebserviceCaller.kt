@@ -9,7 +9,7 @@ import retrofit.*
 
 class MyWebserviceCaller {
     var retrofit : Retrofit? = null
-    val baseUrl : String = ""
+    val baseUrl : String = "http://localhost:5000/"
 
     constructor(){
         val client: OkHttpClient = OkHttpClient()
