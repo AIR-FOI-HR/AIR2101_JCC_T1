@@ -15,9 +15,9 @@ import com.example.jcct1_android_app.databinding.FragmentHomeBinding
 import com.example.jcct1_android_app.recyclerview.MuseumParent
 import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
 import com.example.jcct1_android_app.repository.DataRepository
-import com.example.jcct1_android_app.repository.LoadDataListener
+import com.example.jcct1_android_app.repository.LoadMuseumDataListener
 
-class MuseumBrowsingFragment : Fragment(), LoadDataListener {
+class MuseumBrowsingFragment : Fragment(), LoadMuseumDataListener {
 
     private var viewReadyFlag: Boolean = false
     private var dataReadyFlag: Boolean = false
@@ -50,14 +50,14 @@ class MuseumBrowsingFragment : Fragment(), LoadDataListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewReadyFlag = true
-        DataRepository().loadData(this)
+        DataRepository().loadMuseumData(this)
         tryToDisplayData()
 
     }
 
 
 
-    override fun onDataLoaded(museums: List<Museum>?) {
+    override fun onMuseumDataLoaded(museums: List<Museum>?) {
         this.museums = museums
         dataReadyFlag = true
         tryToDisplayData()

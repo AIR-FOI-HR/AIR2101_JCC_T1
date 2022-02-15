@@ -4,21 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.all.entities.entities.Artwork
-import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.databinding.FragmentGalleryBinding
-import com.example.jcct1_android_app.recyclerview.MuseumParent
-import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
 import com.example.jcct1_android_app.repository.DataRepository
-import com.example.jcct1_android_app.repository.LoadDataListener
+import com.example.jcct1_android_app.repository.LoadArtworkDataListener
+import com.example.jcct1_android_app.repository.LoadMuseumDataListener
 
-class ArtInfoFragment : Fragment(), LoadDataListener {
+class ArtInfoFragment : Fragment(), LoadArtworkDataListener {
 
 
     private var viewReadyFlag: Boolean = false
@@ -49,14 +43,14 @@ class ArtInfoFragment : Fragment(), LoadDataListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewReadyFlag = true
-        DataRepository().loadData(this)
+        DataRepository().loadArtData(this)
         tryToDisplayData()
 
     }
 
 
 
-    override fun onDataLoaded(museums: List<Museum>?) {
+    override fun onArtDataLoaded(artworks: List<Artwork>?) {
         this.artworks= artworks
         dataReadyFlag = true
         tryToDisplayData()
@@ -64,17 +58,19 @@ class ArtInfoFragment : Fragment(), LoadDataListener {
 
 
     private fun tryToDisplayData() {
-        if (dataReadyFlag  && viewReadyFlag)
-        {
-            if (artworks != null) {
+       // if (dataReadyFlag  && viewReadyFlag)
+       // {
+         //   if (artworks != null) {
               //  val parentList : ArrayList<MuseumParent> = ArrayList()
               //  for (s in artworks!!)
               //      parentList.add(MuseumParent(s, artworks!!))
 
                 //prikaz podataka
+        //Ja želim samo jednu sliku, ne sve iz baze. Riješiti sutra i prikazati
+                _binding?.textView2?.setText("bla")
 
-            }
-        }
+         //   }
+       // }
     }
     
 
