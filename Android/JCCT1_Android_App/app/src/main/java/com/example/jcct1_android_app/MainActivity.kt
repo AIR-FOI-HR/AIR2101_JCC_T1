@@ -2,7 +2,6 @@ package com.example.jcct1_android_app
 
 import android.os.Bundle
 import android.view.Menu
-import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -13,12 +12,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jcct1_android_app.databinding.ActivityMainBinding
-import com.example.jcct1_android_app.repository.DataRepository
-import com.example.jcct1_android_app.ui.home.HomeFragment
+import com.example.jcct1_android_app.ui.home.MuseumBrowsingFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private var currentFragment: HomeFragment? = null
+    private var currentFragment: MuseumBrowsingFragment? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 

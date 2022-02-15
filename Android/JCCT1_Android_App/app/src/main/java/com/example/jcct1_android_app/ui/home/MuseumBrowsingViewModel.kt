@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.repository.LoadDataListener
 
-class HomeViewModel : ViewModel(){
+class MuseumBrowsingViewModel : ViewModel(){
 
     private val _text = MutableLiveData<String>().apply {
         value = ""
