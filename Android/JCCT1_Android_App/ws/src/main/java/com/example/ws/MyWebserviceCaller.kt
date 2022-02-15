@@ -1,15 +1,14 @@
 package com.example.ws
 
 import com.example.ws.handlers.MyWebserviceHandler
-import com.example.ws.responses.MyWebserviceResponse
+import com.example.ws.responses.MyWebserviceResponseMuseum
 import com.squareup.okhttp.OkHttpClient
 import com.example.core.all.entities.entities.Museum
-import com.google.gson.Gson
 import retrofit.*
 
 class MyWebserviceCaller {
     var retrofit : Retrofit? = null
-    val baseUrl : String = "http://192.168.5.22:5000/"
+    val baseUrl : String = "http://192.168.100.210:5000/"
 
     constructor(){
         val client: OkHttpClient = OkHttpClient()
@@ -24,24 +23,24 @@ class MyWebserviceCaller {
     fun getAllMuseums(method: String, dataArrivedHandler: MyWebserviceHandler)
     {
         val serviceCaller: MyWebservice? = retrofit?.create(MyWebservice::class.java)
-        var call: Call<MyWebserviceResponse>? = null
+        var call: Call<MyWebserviceResponseMuseum>? = null
         if (serviceCaller != null) {
             call = serviceCaller.getAllMuseumsCaller()
         }
 
         if(call != null){
-            call.enqueue(object: Callback<MyWebserviceResponse> {
+            call.enqueue(object: Callback<MyWebserviceResponseMuseum> {
 
 
                 override fun onResponse(
-                    response: Response<MyWebserviceResponse>?,
+                    responseMuseum: Response<MyWebserviceResponseMuseum>?,
                     retrofit: Retrofit?
                 ) {
                     try{
-                        if (response != null) {
-                            if(response.isSuccess()){
+                        if (responseMuseum != null) {
+                            if(responseMuseum.isSuccess()){
                                 println("Got stores... Processing...")
-                                val museumItems: Array<Museum>? = response.body().items;
+                                val museumItems: Array<Museum>? = responseMuseum.body().items;
 
                               //  val gson : Gson = Gson()
                               //  val museumItems: Array<Museum>? = gson.fromJson(response.body().items, Array<Museum>::class.java)
