@@ -18,31 +18,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <ImageView
-            android:id="@+id/museum_image"
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:contentDescription="@string/store_image"
-            android:src="@mipmap/ic_launcher"/>
 
         <TextView
             android:id="@+id/museum_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/store_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textIsSelectable="false"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"/>
+            android:text="@string/museum_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textIsSelectable="false" />
 
-        <TextView
-            android:id="@+id/museum_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/store_desc"
-            android:textAppearance="@style/TextAppearance.Compat.Notification"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"/>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -11,14 +11,11 @@ import org.jetbrains.annotations.NotNull
 
 class MuseumViewHolder(@NotNull itemView : View ) : ParentViewHolder<MuseumParent, Museum>(itemView) {
     var museumName = itemView.findViewById<TextView>(R.id.museum_name)
-    var museumDesc = itemView.findViewById<TextView>(R.id.museum_desc)
- //   var museumImage = itemView.findViewById<ImageView>(R.id.museum_image)
+
 
     fun bindDataToView(museum: Museum)
     {
         museumName?.text = museum.Name
-        museumDesc?.text = museum.Layout
-      //  Picasso.with(itemView.context).load(museum.imgUrl).into(storeImage)
     }
 
 }

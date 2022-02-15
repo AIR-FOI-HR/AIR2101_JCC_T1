@@ -14,14 +14,14 @@ class MuseumRecyclerAdapter(var context: Context,@NotNull parentList: ArrayList<
 
     override fun onCreateParentViewHolder(parentViewGroup: ViewGroup, viewType: Int): MuseumViewHolder {
         val itemView : View =
-            LayoutInflater.from(context).inflate(R.layout.list_item_museum, parentViewGroup, false)
+            LayoutInflater.from(context).inflate(R.layout.list_item_museum_main, parentViewGroup, false)
 
         return MuseumViewHolder(itemView)
     }
 
     override fun onCreateChildViewHolder(childViewGroup: ViewGroup, viewType: Int): DiscountViewHolder {
         val itemView : View =
-            LayoutInflater.from(context).inflate(R.layout.list_item_museum, childViewGroup, false)
+            LayoutInflater.from(context).inflate(R.layout.list_item_museum_under, childViewGroup, false)
 
         return DiscountViewHolder(itemView)
     }

@@ -9,7 +9,7 @@ import com.example.jcct1_android_app.repository.LoadDataListener
 class HomeViewModel : ViewModel(){
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Neki znja"
+        value = ""
     }
     val text: LiveData<String> = _text
 
