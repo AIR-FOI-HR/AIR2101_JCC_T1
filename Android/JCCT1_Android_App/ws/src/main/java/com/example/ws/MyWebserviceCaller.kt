@@ -2,14 +2,14 @@ package com.example.ws
 
 import com.example.ws.handlers.MyWebserviceHandler
 import com.example.ws.responses.MyWebserviceResponse
-import com.google.gson.Gson
 import com.squareup.okhttp.OkHttpClient
 import com.example.core.all.entities.entities.Museum
+import com.google.gson.Gson
 import retrofit.*
 
 class MyWebserviceCaller {
     var retrofit : Retrofit? = null
-    val baseUrl : String = "http://localhost:5000/"
+    val baseUrl : String = "http://192.168.5.22:5000/"
 
     constructor(){
         val client: OkHttpClient = OkHttpClient()
@@ -26,14 +26,12 @@ class MyWebserviceCaller {
         val serviceCaller: MyWebservice? = retrofit?.create(MyWebservice::class.java)
         var call: Call<MyWebserviceResponse>? = null
         if (serviceCaller != null) {
-            call = serviceCaller.getAllMuseumsCaller(method)
+            call = serviceCaller.getAllMuseumsCaller()
         }
 
         if(call != null){
             call.enqueue(object: Callback<MyWebserviceResponse> {
-                override fun onFailure(t: Throwable?) {
-                    t?.printStackTrace()
-                }
+
 
                 override fun onResponse(
                     response: Response<MyWebserviceResponse>?,
@@ -43,18 +41,25 @@ class MyWebserviceCaller {
                         if (response != null) {
                             if(response.isSuccess()){
                                 println("Got stores... Processing...")
-                                val gson : Gson = Gson()
-                                val storeItems: Array<Museum>? = gson.fromJson(response.body().name, Array<Museum>::class.java)
+                                val museumItems: Array<Museum>? = response.body().items;
 
-                                if (storeItems != null) {
-                                    //data obtained stend it to handler
-                                    dataArrivedHandler.onDataArrived<Museum>(storeItems.toList(), true)
+                              //  val gson : Gson = Gson()
+                              //  val museumItems: Array<Museum>? = gson.fromJson(response.body().items, Array<Museum>::class.java)
+
+                                if (museumItems != null) {
+                                    //data obtained send it to handler
+                                    //dataArrivedHandler.onDataArrived<Museum>(museumItems.toList(), true, response.body().timeStamp)
+                                    dataArrivedHandler.onDataArrived<Museum>(museumItems.toList(), true)
                                 }
                             }
                         }
                     }catch (ex: Exception){
                         ex.printStackTrace()
                     }
+                }
+
+                override fun onFailure(t: Throwable?) {
+                    t?.printStackTrace()
                 }
             })
         }

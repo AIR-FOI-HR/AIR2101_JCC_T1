@@ -4,9 +4,9 @@ import com.bignerdranch.expandablerecyclerview.model.Parent
 import com.example.core.all.entities.entities.Museum
 
 class MuseumParent(museum: Museum, allMuseums: List<Museum>) : Parent<Museum>,
-    Museum(museum.MuseumId, museum.Name, museum.Phone, museum.Email, museum.Address, museum.Layout) {
+    Museum(museum.MuseumID, museum.Name, museum.Phone, museum.Email, museum.Address, museum.Layout) {
 
-    var myMuseums = allMuseums.filter { d -> d.MuseumId == this.MuseumId }
+    var myMuseums = allMuseums.filter { d -> d.MuseumID == this.MuseumID }
 
 
     override fun getChildList(): List<Museum> {

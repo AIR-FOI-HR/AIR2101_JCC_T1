@@ -1,10 +1,11 @@
 package com.example.ws.responses
 
+import com.example.core.all.entities.entities.Museum
+import java.util.*
+
 class MyWebserviceResponse {
-    val museumId : Int? = null
-    val name : String = ""
-    val phone : String = ""
-    val mail : String = ""
-    val address : String = ""
-    val layout : String = ""
+    val items: Array<Museum>? = null
+    val responseId: Int? = null
+    val responseText: String? = ""
+    val timeStamp: String? = ""
 }

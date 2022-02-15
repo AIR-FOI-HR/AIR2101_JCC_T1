@@ -11,6 +11,6 @@ interface MyWebservice {
 
 
     @GET("museum")
-    fun getAllMuseumsCaller(@Field("method") method: String) : retrofit.Call<MyWebserviceResponse>
+    fun getAllMuseumsCaller() : retrofit.Call<MyWebserviceResponse>
 
 }

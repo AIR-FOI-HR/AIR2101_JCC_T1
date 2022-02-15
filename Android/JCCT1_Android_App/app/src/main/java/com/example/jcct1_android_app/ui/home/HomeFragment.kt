@@ -1,5 +1,6 @@
 package com.example.jcct1_android_app.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.all.entities.entities.Museum
+import com.example.jcct1_android_app.MainActivity
 import com.example.jcct1_android_app.R
 import com.example.jcct1_android_app.databinding.FragmentHomeBinding
 import com.example.jcct1_android_app.recyclerview.MuseumParent
 import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
+import com.example.jcct1_android_app.repository.DataRepository
+import com.example.jcct1_android_app.repository.LoadDataListener
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), LoadDataListener {
 
     private var viewReadyFlag: Boolean = false
     private var dataReadyFlag: Boolean = false
@@ -49,13 +53,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewReadyFlag = true
+        DataRepository().loadData(this)
         tryToDisplayData()
 
     }
 
 
 
-    fun onDataLoaded(museums: List<Museum>?) {
+    override fun onDataLoaded(museums: List<Museum>?) {
         this.museums = museums
         dataReadyFlag = true
         tryToDisplayData()
@@ -63,7 +68,7 @@ class HomeFragment : Fragment() {
 
 
     private fun tryToDisplayData() {
-        if (dataReadyFlag && viewReadyFlag)
+        if (dataReadyFlag  && viewReadyFlag)
         {
             if (museums != null) {
                 val parentList : ArrayList<MuseumParent> = ArrayList()
@@ -80,6 +85,13 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+ /*   fun loadDataToFragment()
+    {
+
+        print("blabla")
+        DataRepository().loadData(context, this)
+    }*/
 
 
     override fun onDestroyView() {

@@ -1,6 +1,5 @@
 package com.example.ws
 
-import android.content.Context
 import com.example.core.all.entities.data.DataSource
 import com.example.core.all.entities.data.DataSourceListener
 import com.example.core.all.entities.entities.Museum
@@ -13,7 +12,7 @@ class WsDataSource : DataSource {
 
     private var museumsArrived: Boolean = false
 
-    override fun loadData(dataSourceListener: DataSourceListener, context: Context) {
+    override fun loadData(dataSourceListener: DataSourceListener) {
 
         this.listener = dataSourceListener
 
@@ -24,16 +23,13 @@ class WsDataSource : DataSource {
 
     @Suppress("UNCHECKED_CAST")
     private val museumHandler: MyWebserviceHandler = object : MyWebserviceHandler{
-         override fun <T> onDataArrived(result: List<T>, ok: Boolean) {
+          override fun <T> onDataArrived(result: List<T>, ok: Boolean) {
             if(ok){
                 museums = result as List<Museum>
             }
             museumsArrived = true
             checkDataArrival()
         }
-
-
-
     }
 
     private fun checkDataArrival(){
