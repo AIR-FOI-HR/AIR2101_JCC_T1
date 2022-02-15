@@ -11,10 +11,10 @@ class DataRepository {
     {
         println("Ovdje je nekaj")
 
-        var dataSource : DataSource
-        dataSource = WsDataSource()
+        var museumdataSource : DataSource
+        museumdataSource = WsDataSource()
 
-        dataSource.loadData(
+        museumdataSource.loadData(
             object : DataSourceListener {
                 override fun onDataLoaded(museums: List<Museum>?) {
                     println("Ovdje je nekaj")
@@ -22,5 +22,8 @@ class DataRepository {
                 }
             }
         )
+
+
+
     }
 }

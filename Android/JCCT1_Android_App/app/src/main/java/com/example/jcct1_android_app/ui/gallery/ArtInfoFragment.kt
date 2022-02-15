@@ -5,13 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.core.all.entities.entities.Artwork
+import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.databinding.FragmentGalleryBinding
+import com.example.jcct1_android_app.recyclerview.MuseumParent
+import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
+import com.example.jcct1_android_app.repository.DataRepository
+import com.example.jcct1_android_app.repository.LoadDataListener
 
-class ArtInfoFragment : Fragment() {
+class ArtInfoFragment : Fragment(), LoadDataListener {
 
+
+    private var viewReadyFlag: Boolean = false
+    private var dataReadyFlag: Boolean = false
+    private var artworks: List<Artwork>? = null
     private lateinit var artInfoFragmentViewModel: ArtInfoFragmentViewModel
     private var _binding: FragmentGalleryBinding? = null
 
@@ -33,6 +45,38 @@ class ArtInfoFragment : Fragment() {
 
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewReadyFlag = true
+        DataRepository().loadData(this)
+        tryToDisplayData()
+
+    }
+
+
+
+    override fun onDataLoaded(museums: List<Museum>?) {
+        this.artworks= artworks
+        dataReadyFlag = true
+        tryToDisplayData()
+    }
+
+
+    private fun tryToDisplayData() {
+        if (dataReadyFlag  && viewReadyFlag)
+        {
+            if (artworks != null) {
+              //  val parentList : ArrayList<MuseumParent> = ArrayList()
+              //  for (s in artworks!!)
+              //      parentList.add(MuseumParent(s, artworks!!))
+
+                //prikaz podataka
+
+            }
+        }
+    }
+    
 
     override fun onDestroyView() {
         super.onDestroyView()
