@@ -19,7 +19,6 @@
         $_POST['name'] = "";
         $_POST['email'] = "";
     }
-
     if (isset($_POST['submit']))
     {
         $connection = new Database();
@@ -29,18 +28,26 @@
         { 
             $role = 1;
         }
+        $pass = generatePassword();
         $query = "INSERT INTO `user`
             VALUES (DEFAULT, 
             '".$_POST['email']."', 
-            '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 
+            '".hash("sha256", $pass)."', 
             '".date("Y-m-d")."', 
             '".$_POST['name']."', 
             '$role')";
         $result = $connection->updateDB($query);
+        if ($result == 1)
+        {
+            //mail($_POST['email'], "JCC password", "Your password for JCC is: $pass");
+        }
+        $connection->closeDB();
+        $connection = new Database();
+        $connection->connectDB();
         
         $query = "SELECT `UserID` 
             FROM `user` 
-            WHERE Email=".$_POST['email'];
+            WHERE Email='".$_POST['email']."'";
         $result = $connection->selectDB($query);
         $row = mysqli_fetch_array($result);
         
@@ -60,7 +67,19 @@
         }
         $result = $connection->updateDB($query2);
         $connection->closeDB();
-        header("Location: ./museummanagement.php");
+        echo $pass;
+        //header("Location: ./museummanagement.php");
+    }
+
+    function generatePassword()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $pass = "";
+        for ($i = 0; $i < 10; $i++) {
+            $pass .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $pass;
     }
 ?>
 
