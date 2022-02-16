@@ -1,24 +1,38 @@
 package com.example.jcct1_android_app.repository
 
+import com.example.core.all.entities.data.ArtworkDataSourceListener
 import com.example.core.all.entities.entities.Museum
 import com.example.ws.WsDataSource
 import com.example.core.all.entities.data.DataSource
-import com.example.core.all.entities.data.DataSourceListener
+import com.example.core.all.entities.data.MuseumDataSourceListener
+import com.example.core.all.entities.entities.Artwork
 
 
 class DataRepository {
-    fun loadData(listener : LoadDataListener)
+    fun loadMuseumData(listenerMuseum : LoadMuseumDataListener)
     {
-        println("Ovdje je nekaj")
+        var museumdataSource : DataSource
+        museumdataSource = WsDataSource()
 
-        var dataSource : DataSource
-        dataSource = WsDataSource()
+        museumdataSource.loadMuseumData(
+            object : MuseumDataSourceListener {
+                override fun onMuseumDataLoaded(museums: List<Museum>?) {
+                    listenerMuseum.onMuseumDataLoaded(museums)
+                }
 
-        dataSource.loadData(
-            object : DataSourceListener {
-                override fun onDataLoaded(museums: List<Museum>?) {
-                    println("Ovdje je nekaj")
-                    listener.onDataLoaded(museums)
+            }
+        )
+    }
+
+    fun loadArtData(listenerArtwork : LoadArtworkDataListener)
+    {
+        var artdataSource : DataSource
+        artdataSource = WsDataSource()
+
+        artdataSource.loadArtworkData(
+            object : ArtworkDataSourceListener {
+                override fun onArtDataLoaded(artworks: List<Artwork>?) {
+                    listenerArtwork.onArtDataLoaded(artworks)
                 }
             }
         )

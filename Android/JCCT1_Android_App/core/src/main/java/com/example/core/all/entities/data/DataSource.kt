@@ -1,6 +1,6 @@
 package com.example.core.all.entities.data
-import android.content.Context
 
 interface DataSource {
-    fun loadData(dataSourceListener: DataSourceListener)
+    fun loadMuseumData(museumDataSourceListener: MuseumDataSourceListener)
+    fun loadArtworkData(artworkDataSourceListener: ArtworkDataSourceListener)
 }
