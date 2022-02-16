@@ -82,6 +82,25 @@
             }
         }
     }
+    function printMuseumCurators()
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+        FROM `curator` c
+        LEFT JOIN `user` u 
+        ON u.UserID = c.UserID
+        WHERE c.MuseumID = ".$GLOBALS['museumID'];
+        $result = $connection->selectDB($query);
+        while ($row = mysqli_fetch_array($result))
+        {
+            echo "<tr>
+                <td>".$row['Name']."</td>
+                <td>".$row['Email']."</td>
+                <td>".$row['RegistrationDate']."</td>
+                <td><a href=\"\">Remove</a></td>";
+        }
+    }
 ?>
 
 Museum:<br>
@@ -101,6 +120,7 @@ Museum:<br>
 </table>
 
 <br>
+Admins:
 <table>
     <tr>
         <th>Name</th>
@@ -109,6 +129,18 @@ Museum:<br>
         <th>Remove</th>
     </tr>
     <?php printMuseumAdmins()?>
+</table>
+
+<br>
+Curators:
+<table>
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Registration Date</th>
+        <th>Remove</th>
+    </tr>
+    <?php printMuseumCurators()?>
 </table>
 
 <?php
