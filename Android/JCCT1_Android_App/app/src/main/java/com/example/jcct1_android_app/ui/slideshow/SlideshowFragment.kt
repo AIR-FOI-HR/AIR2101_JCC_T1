@@ -28,7 +28,6 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
     private var viewReadyFlag: Boolean = false
     private lateinit var slideshowViewModel: SlideshowViewModel
     private var _binding: FragmentSlideshowBinding? = null
-    private var museums: List<Museum>? = null
     private var museum: Museum? = null
 
     // This property is only valid between onCreateView and
@@ -59,18 +58,15 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
 
 
 
-    override fun onMuseumDataLoaded(museumse: List<Museum>?) {
-        this.museums = museumse
+    override fun onMuseumDataLoaded(museums: List<Museum>?) {
 
-        if (museumse != null) {
-            for(i in museumse.indices){
-                if(museumse[i].MuseumID == museumid){
-                    museum = museumse[i]
+        if (museums != null) {
+            for(i in museums.indices){
+                if(museums[i].MuseumID == museumid){
+                    museum = museums[i]
                 }
             }
         }
-
-
         dataReadyFlag = true
         tryToDisplayData()
     }
@@ -78,7 +74,7 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
 
     private fun tryToDisplayData() {
         if (dataReadyFlag && viewReadyFlag) {
-            if (museums != null) {
+            if (museum != null) {
                // val parentList: ArrayList<MuseumParent> = ArrayList()
                // for (s in museums!!)
                //     parentList.add(MuseumParent(s, museums!!))
