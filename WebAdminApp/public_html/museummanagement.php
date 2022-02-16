@@ -120,6 +120,7 @@ Museum:<br>
 </table>
 
 <br>
+<a href="./newadmin.php?admin=1">New Admin</a>
 Admins:
 <table>
     <tr>
@@ -132,6 +133,7 @@ Admins:
 </table>
 
 <br>
+<a href="./newadmin.php?admin=0">New Curator</a>
 Curators:
 <table>
     <tr>
