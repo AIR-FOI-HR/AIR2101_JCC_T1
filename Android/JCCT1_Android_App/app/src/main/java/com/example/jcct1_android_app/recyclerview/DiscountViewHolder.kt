@@ -10,11 +10,14 @@ import androidx.navigation.Navigation.findNavController
 import com.bignerdranch.expandablerecyclerview.ChildViewHolder
 import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.R
+import com.example.jcct1_android_app.public_data.PublicData
+import com.example.jcct1_android_app.public_data.PublicData.Companion.museumid
 import com.example.jcct1_android_app.ui.slideshow.SlideshowFragment
 
 class DiscountViewHolder: ChildViewHolder<Museum> {
     var museumDesc: TextView? = null
     var moreInfoButton: Button? = null
+
 
     constructor(@NonNull itemView: View): super(itemView){
         museumDesc = itemView.findViewById(R.id.museum_desc)
@@ -27,6 +30,7 @@ class DiscountViewHolder: ChildViewHolder<Museum> {
         moreInfoButton?.setOnClickListener()
         {
             val controller = findNavController(itemView)
+            museumid = discount.MuseumID
             controller.navigate(R.id.nav_slideshow)
 
         }
