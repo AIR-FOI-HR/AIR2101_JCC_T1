@@ -78,7 +78,7 @@
                     <td>".$row['Name']."</td>
                     <td>".$row['Email']."</td>
                     <td>".$row['RegistrationDate']."</td>
-                    <td><a href=\"\">Remove</a></td>";
+                    <td><a href=\"./deleteadmin.php?id=".$row['UserID']."&admin=1\">Remove</a></td>";
             }
         }
     }
@@ -98,7 +98,7 @@
                 <td>".$row['Name']."</td>
                 <td>".$row['Email']."</td>
                 <td>".$row['RegistrationDate']."</td>
-                <td><a href=\"\">Remove</a></td>";
+                <td><a href=\"./deleteadmin.php?id=".$row['UserID']."&admin=0\">Remove</a></td>";
         }
     }
 ?>
