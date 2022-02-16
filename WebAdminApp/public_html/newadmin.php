@@ -35,7 +35,10 @@
             '".hash("sha256", $pass)."', 
             '".date("Y-m-d")."', 
             '".$_POST['name']."', 
-            '$role')";
+            '$role')
+            ON DUPLICATE KEY 
+            UPDATE RoleID=$role";
+        echo $query."<br>";
         $result = $connection->updateDB($query);
         if ($result == 1)
         {
