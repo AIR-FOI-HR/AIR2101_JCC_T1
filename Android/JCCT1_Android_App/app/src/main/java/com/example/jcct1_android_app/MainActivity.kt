@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jcct1_android_app.databinding.ActivityMainBinding
+
 import com.example.jcct1_android_app.ui.home.MuseumBrowsingFragment
 
 class MainActivity : AppCompatActivity() {
