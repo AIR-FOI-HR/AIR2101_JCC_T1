@@ -41,7 +41,7 @@
     }
 ?>
 
-<a href="./newevent.php">New event</a>
+<?php if ($user[Session::ROLE] == 2) echo "<a href=\"./newevent.php\">New event</a>"; ?>
 <table>
     <tr>
         <th>Name</th>
