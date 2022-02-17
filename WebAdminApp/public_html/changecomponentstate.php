@@ -7,6 +7,10 @@
     {
         header("Location: ./login.php");
     }
+    if ($user[Session::ROLE] != 1)
+    {
+        header("Location: ./index.php");
+    }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
     
     if (!isset($_GET['id']))

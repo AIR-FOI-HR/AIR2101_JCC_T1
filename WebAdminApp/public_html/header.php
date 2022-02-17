@@ -25,7 +25,7 @@
                         {
                             echo "<li><a href=\"./artwork.php\">Artwork</a></li>";
                         }
-                        else if ($user[Session::ROLE] == 1)
+                        if ($user[Session::ROLE] == 1)
                         {
                             echo "<li><a href=\"./museummanagement.php\">Museum Management</a></li>";
                         }

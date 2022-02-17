@@ -3,9 +3,13 @@
     $directory = getcwd();
     require "./header.php";
 
-    if (empty($user))
+    if (empty($user)) 
     {
         header("Location: ./login.php");
+    }
+    if ($user[Session::ROLE] != 1)
+    {
+        header("Location: ./index.php");
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
     $GLOBALS['userID'] = $user[Session::ID];
