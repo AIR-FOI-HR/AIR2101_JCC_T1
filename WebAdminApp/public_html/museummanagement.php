@@ -27,7 +27,7 @@
             echo "<a>Name: ".$row['Name']."</a><br>
             <a>Phone: ".$row['Phone']."</a><br>
             <a>Email: ".$row['Email']."</a><br>
-            <a>Layout: ".$row['Layout']."</a><br>";
+            <a>Layout: </a><img/ width=\"200\" height=\"200\" src=\"./images/".$row['Layout']."\"><br>";
         }
         $connection->closeDB();
     }
@@ -109,6 +109,7 @@
 
 Museum:<br>
 <?php printMuseumDetails(); ?>
+<a href="./updatemuseum.php">Update museum info</a><br>
 <br>
 <a href="./newcomponent.php">New Component</a>
 <table>
