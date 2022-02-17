@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.core.all.entities.entities.Artwork
+import com.example.jcct1_android_app.R
 import com.example.jcct1_android_app.databinding.FragmentGalleryBinding
 import com.example.jcct1_android_app.public_data.PublicData
 import com.example.jcct1_android_app.repository.DataRepository
@@ -27,6 +30,7 @@ class ArtInfoFragment : Fragment(), LoadArtworkDataListener {
     private var artworks: List<Artwork>? = null
     private lateinit var artInfoFragmentViewModel: ArtInfoFragmentViewModel
     private var _binding: FragmentGalleryBinding? = null
+    var backButton: Button? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -88,6 +92,12 @@ class ArtInfoFragment : Fragment(), LoadArtworkDataListener {
                 artworkTitle?.text = artwork?.Name
                 artworkAuthor?.text = artwork?.Author
                 artworkDescription?.text = artwork?.Description
+
+                backButton = _binding?.buttonBack
+                backButton?.setOnClickListener(){
+                    val controller = Navigation.findNavController(requireView())
+                    controller.navigate(R.id.nav_innerMuseum)
+                }
 
 
             }
