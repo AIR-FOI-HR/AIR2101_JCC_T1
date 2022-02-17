@@ -59,7 +59,7 @@
         }
         $result = $connection->updateDB($query);
         $connection->closeDB();
-        header("Location: ./artwork.php");
+        header("Location: ./events.php");
     }
 ?>
 
