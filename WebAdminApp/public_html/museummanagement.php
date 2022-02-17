@@ -109,6 +109,7 @@
 
 Museum:<br>
 <?php printMuseumDetails(); ?>
+<a href="./updatemuseum.php">Update museum info</a><br>
 <br>
 <a href="./newcomponent.php">New Component</a>
 <table>
