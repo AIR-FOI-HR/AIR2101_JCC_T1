@@ -73,7 +73,7 @@
     <label for="time">Time: </label>
     <input id="time" name="time" type="time" value="<?php if (!empty($_POST['time'])) echo $_POST['time'] ?>"/><br>
 
-    <input name="submit" type="submit" value="Add artwork"/>
+    <input name="submit" type="submit" value="Add event"/>
 </form>
 
 <br><?php if (isset($error)) echo $error; ?>
