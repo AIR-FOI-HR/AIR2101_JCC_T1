@@ -95,7 +95,7 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
                     val nextFragment: Fragment = MuseumNavigationFragment()
                     val controller = Navigation.findNavController(requireView())
                     //view
-                    controller.navigate(R.id.nav_gallery)
+                    controller.navigate(R.id.nav_innerMuseum)
                    // supportFragmentManager
                    // val fragmentManager: FragmentTransaction
 

@@ -8,13 +8,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.core.all.entities.entities.Artwork
 import com.example.core.all.entities.entities.Museum
-import com.example.jcct1_android_app.databinding.FragmentSlideshowBinding
-import com.example.jcct1_android_app.public_data.PublicData
-import com.example.jcct1_android_app.repository.DataRepository
-import com.example.jcct1_android_app.repository.LoadArtworkDataListener
-import com.example.jcct1_android_app.ui.slideshow.SlideshowViewModel
+import com.example.jcct1_android_app.databinding.FragmentMuseumInnerSpaceBinding
+
 
 class MuseumNavigationFragment: Fragment() {
 
@@ -25,7 +21,7 @@ class MuseumNavigationFragment: Fragment() {
     private var dataReadyFlag: Boolean = false
     private var viewReadyFlag: Boolean = false
 
-    private var _binding: FragmentSlideshowBinding? = null
+    private var _binding: FragmentMuseumInnerSpaceBinding? = null
     private var museum: Museum? = null
 
     private val binding get() = _binding!!
@@ -37,7 +33,7 @@ class MuseumNavigationFragment: Fragment() {
     ): View? {
         museumNavigationViewModel =
             ViewModelProvider(this).get(MuseumNavigationViewModel::class.java)
-        _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
+        _binding = FragmentMuseumInnerSpaceBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
         return root
