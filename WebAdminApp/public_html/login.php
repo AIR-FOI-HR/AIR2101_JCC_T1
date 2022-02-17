@@ -4,6 +4,12 @@
     require "./header.php";
     $error = "";
 
+    if (!empty($user))
+    {
+        Session::deleteSession();
+        header("Location: ./login.php");
+    }
+
     if (isset($_POST['submit']))
     {
         $email = $_POST['email'];
