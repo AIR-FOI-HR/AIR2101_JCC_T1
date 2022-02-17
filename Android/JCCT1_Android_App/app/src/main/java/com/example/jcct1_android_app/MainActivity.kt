@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jcct1_android_app.databinding.ActivityMainBinding
 
 import com.example.jcct1_android_app.ui.home.MuseumBrowsingFragment
+import com.example.jcct1_android_app.ui.slideshow.SlideshowFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_innerMuseum
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

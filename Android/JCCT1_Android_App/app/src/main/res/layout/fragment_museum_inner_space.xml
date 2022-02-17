@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_frames">
+    android:padding="@dimen/padding_frames"
+    android:id="@+id/fragment_museum_inner_space">
 
     <Button
         android:id="@+id/button1"

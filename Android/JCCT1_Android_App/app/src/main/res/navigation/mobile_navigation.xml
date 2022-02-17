@@ -22,4 +22,10 @@
         android:name="com.example.jcct1_android_app.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/fragment_museum_navigation"
+        android:name="com.example.jcct1_android_app.ui.museumNavigation.MuseumNavigationFragment"
+        android:label="InnerMuseum"
+        tools:layout="@layout/fragment_museum_inner_space" />
 </navigation>
