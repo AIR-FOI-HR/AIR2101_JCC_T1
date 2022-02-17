@@ -92,9 +92,8 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
 
                 museumNavButton = binding.museumNavigation
                 museumNavButton?.setOnClickListener(){
-                    val nextFragment: Fragment = MuseumNavigationFragment()
+
                     val controller = Navigation.findNavController(requireView())
-                    //view
                     controller.navigate(R.id.nav_innerMuseum)
                    // supportFragmentManager
                    // val fragmentManager: FragmentTransaction

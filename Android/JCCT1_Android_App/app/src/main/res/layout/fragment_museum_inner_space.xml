@@ -9,13 +9,10 @@
     android:id="@+id/fragment_museum_inner_space">
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="85dp"
-        android:layout_height="68dp"
-        android:background="@drawable/round_button"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="hello"
-        android:textColor="#fff"
+        android:id="@+id/button_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

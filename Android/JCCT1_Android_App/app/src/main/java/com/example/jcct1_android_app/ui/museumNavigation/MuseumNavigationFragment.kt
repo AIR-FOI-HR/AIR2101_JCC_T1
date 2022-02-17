@@ -8,21 +8,27 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import com.example.core.all.entities.entities.Artwork
 import com.example.core.all.entities.entities.Museum
+import com.example.jcct1_android_app.R
 import com.example.jcct1_android_app.databinding.FragmentMuseumInnerSpaceBinding
+import com.example.jcct1_android_app.public_data.PublicData
+import com.example.jcct1_android_app.public_data.PublicData.Companion.artid
+import com.example.jcct1_android_app.repository.DataRepository
+import com.example.jcct1_android_app.repository.LoadArtworkDataListener
 
 
-class MuseumNavigationFragment: Fragment() {
+class MuseumNavigationFragment: Fragment(), LoadArtworkDataListener {
 
     private lateinit var museumNavigationViewModel: MuseumNavigationViewModel
-    var museumTitle: TextView? = null
-    var museumDesc: TextView? = null
-    var museumNavButton: Button? = null
+
     private var dataReadyFlag: Boolean = false
     private var viewReadyFlag: Boolean = false
-
+    var artworkButton: Button? = null
     private var _binding: FragmentMuseumInnerSpaceBinding? = null
-    private var museum: Museum? = null
+    private var artwork: Artwork? = null
+    private var artworks: List<Artwork>? = null
 
     private val binding get() = _binding!!
 
@@ -39,24 +45,21 @@ class MuseumNavigationFragment: Fragment() {
         return root
     }
 
- /*   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewReadyFlag = true
-        DataRepository().loadMuseumData(this)
+        DataRepository().loadArtData(this)
         tryToDisplayData()
+
+
+
+
     }
 
 
 
-    override fun onArtworkDataLoaded(museums: List<Artwork>?) {
-
-        if (museums != null) {
-            for(i in museums.indices){
-                if(museums[i].MuseumID == PublicData.museumid){
-                    museum = museums[i]
-                }
-            }
-        }
+    override fun onArtDataLoaded(artworksF: List<Artwork>?) {
+        this.artworks = artworksF
         dataReadyFlag = true
         tryToDisplayData()
     }
@@ -64,26 +67,20 @@ class MuseumNavigationFragment: Fragment() {
 
     private fun tryToDisplayData() {
         if (dataReadyFlag && viewReadyFlag) {
-            if (museum != null) {
-                // val parentList: ArrayList<MuseumParent> = ArrayList()
-                // for (s in museums!!)
-                //     parentList.add(MuseumParent(s, museums!!))
+            if (artworks != null) {
+
 
                 //prikaz podataka
-                museumTitle = binding.titleText
-                museumTitle?.text = museum?.Name
-
-                museumDesc = binding.descriptionText
-                museumDesc?.text = museum?.Layout + museum?.Email + "bla"
-
-                museumNavButton = binding.museumNavigation
-                museumNavButton?.setOnClickListener(){
-                    val nextFragment: Fragment =
+                artworkButton = binding.buttonArt
+                artworkButton?.setOnClickListener(){
+                    PublicData.artid = 1
+                    val controller = Navigation.findNavController(requireView())
+                    controller.navigate(R.id.nav_gallery)
                 }
             }
         }
     }
-*/
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
