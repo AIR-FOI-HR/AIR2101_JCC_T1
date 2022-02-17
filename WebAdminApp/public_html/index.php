@@ -7,8 +7,41 @@
     {
         header("Location: ./login.php");
     }
-
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
+
+    $GLOBALS['visitsSortColumn'] = isset($_POST['sortVisitsColumn']) ? $_POST['sortVisitsColumn'] : 1;
+    $_POST['sortVisitsColumn'] =  $GLOBALS['visitsSortColumn'];
+    $GLOBALS['sortVisitsType'] = isset($_POST['sortVisitsType']) ? $_POST['sortVisitsType'] : "DESC";
+    $_POST['sortVisitsType'] = $GLOBALS['sortVisitsType'];
+
+    if (isset($_POST['dateSort']))
+    {
+        $GLOBALS['visitsSortColumn'] = 1;
+        $_POST['sortVisitsColumn'] = 1;
+        if ($_POST['sortVisitsType'] == "DESC")
+        {
+            $GLOBALS['sortVisitsType'] = "ASC";
+        }
+        else
+        {
+            $GLOBALS['sortVisitsType'] = "DESC";
+        }
+        $_POST['sortVisitsType'] = $GLOBALS['sortVisitsType'];
+    }
+    if (isset($_POST['visitSort']))
+    {
+        $GLOBALS['visitsSortColumn'] = 2;
+        $_POST['sortVisitsColumn'] = 2;
+        if ($_POST['sortVisitsType'] == "DESC")
+        {
+            $GLOBALS['sortVisitsType'] = "ASC";
+        }
+        else
+        {
+            $GLOBALS['sortVisitsType'] = "DESC";
+        }
+        $_POST['sortVisitsType'] = $GLOBALS['sortVisitsType'];
+    }
 
     function printVisits()
     {
@@ -20,7 +53,7 @@
             ON a.ArtID=v.ArtID
             WHERE a.MuseumID='".$GLOBALS['museumID']."'
             GROUP BY Date
-            ORDER BY Date DESC";
+            ORDER BY ".$GLOBALS['visitsSortColumn']." ".$GLOBALS['sortVisitsType']."";
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
@@ -56,14 +89,20 @@
 ?>
 
 Visits by day:<br>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Visits</th>
-    </tr>
-    <?php printVisits()?>
-</table>
+<form name="visitsDay" action="" method="post">
+    <input type="hidden" name="sortVisitsColumn" value="<?php echo $GLOBALS['visitsSortColumn'] ?>"/>
+    <input type="hidden" name="sortVisitsType" value="<?php echo $GLOBALS['sortVisitsType'] ?>"/>
+    <table>
+        <tr>
+            <th><input name="dateSort" type="submit" value="Date"/></th>
+            <th><input name="visitSort" type="submit" value="Visits"/></th>
+        </tr>
+        <?php printVisits()?>
+    </table>
+</form>
+
 <br>
+
 Visits by artwork:<br>
 <table>
     <tr>
