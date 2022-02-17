@@ -115,10 +115,21 @@
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
-            echo "<tr>
-                <td>".$row['Name']."</td>
-                <td>".$row['Visits']."</td>
-            </tr>";
+            if (isset($_POST['search']) && !empty($_POST['search']) && strpos(strtolower($row['Name']), strtolower($_POST['search'])) !== false)
+            {
+                echo "<tr>
+                    <td>".$row['Name']."</td>
+                    <td>".$row['Visits']."</td>
+                </tr>";
+            }
+            else if (!isset($_POST['search']) || empty($_POST['search']))
+            {
+                echo "<tr>
+                    <td>".$row['Name']."</td>
+                    <td>".$row['Visits']."</td>
+                </tr>";
+            }
+
         }
         $connection->closeDB();   
     }
@@ -143,6 +154,7 @@ Visits by artwork:<br>
 <form name="visitsArtwork" action="" method="post">
     <input type="hidden" name="sortArtworkColumn" value="<?php echo $GLOBALS['sortArtworkColumn'] ?>"/>
     <input type="hidden" name="sortArtworkType" value="<?php echo $GLOBALS['sortArtworkType'] ?>"/>
+    <input name="search" type="text" placeholder="Search" value="<?php if(isset($_POST['search'])) echo $_POST['search'] ?>"/>
     <table>
         <tr>
             <th><input name="artworkSort" type="submit" value="Artwork"/></th>
