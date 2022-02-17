@@ -85,7 +85,7 @@
                 }
                 $result = $connection->updateDB($query);
                 $connection->closeDB();
-                //header("Location: ./artwork.php");
+                header("Location: ./artwork.php");
             }
         }
     }
