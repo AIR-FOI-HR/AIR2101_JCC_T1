@@ -42,7 +42,8 @@
     }
 ?>
 
-<a href="./newartwork.php">New artwork</a>
+<a href="./newartwork.php">New artwork</a>  
+<a href="./newevent.php">New event</a>
 <table>
     <tr>
         <th>Name</th>
