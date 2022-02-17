@@ -9,14 +9,15 @@
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
 
-    $GLOBALS['visitsSortColumn'] = isset($_POST['sortVisitsColumn']) ? $_POST['sortVisitsColumn'] : 1;
-    $_POST['sortVisitsColumn'] =  $GLOBALS['visitsSortColumn'];
+    //visits by day sorting and filtering
+    $GLOBALS['sortVisitsColumn'] = isset($_POST['sortVisitsColumn']) ? $_POST['sortVisitsColumn'] : 1;
+    $_POST['sortVisitsColumn'] =  $GLOBALS['sortVisitsColumn'];
     $GLOBALS['sortVisitsType'] = isset($_POST['sortVisitsType']) ? $_POST['sortVisitsType'] : "DESC";
     $_POST['sortVisitsType'] = $GLOBALS['sortVisitsType'];
 
     if (isset($_POST['dateSort']))
     {
-        $GLOBALS['visitsSortColumn'] = 1;
+        $GLOBALS['sortVisitsColumn'] = 1;
         $_POST['sortVisitsColumn'] = 1;
         if ($_POST['sortVisitsType'] == "DESC")
         {
@@ -30,7 +31,7 @@
     }
     if (isset($_POST['visitSort']))
     {
-        $GLOBALS['visitsSortColumn'] = 2;
+        $GLOBALS['sortVisitsColumn'] = 2;
         $_POST['sortVisitsColumn'] = 2;
         if ($_POST['sortVisitsType'] == "DESC")
         {
@@ -43,6 +44,41 @@
         $_POST['sortVisitsType'] = $GLOBALS['sortVisitsType'];
     }
 
+    //visits by artowrk sorting and filtering
+    $GLOBALS['sortArtworkColumn'] = isset($_POST['sortArtworkColumn']) ? $_POST['sortArtworkColumn'] : 2;
+    $_POST['sortArtworkColumn'] =  $GLOBALS['sortArtworkColumn'];
+    $GLOBALS['sortArtworkType'] = isset($_POST['sortArtworkType']) ? $_POST['sortArtworkType'] : "DESC";
+    $_POST['sortArtworkType'] = $GLOBALS['sortArtworkType'];
+
+    if (isset($_POST['artworkSort']))
+    {
+        $GLOBALS['sortArtworkColumn'] = 1;
+        $_POST['sortArtworkColumn'] = 1;
+        if ($_POST['sortArtworkType'] == "DESC")
+        {
+            $GLOBALS['sortArtworkType'] = "ASC";
+        }
+        else
+        {
+            $GLOBALS['sortArtworkType'] = "DESC";
+        }
+        $_POST['sortArtworkType'] = $GLOBALS['sortArtworkType'];
+    }
+    if (isset($_POST['visit2Sort']))
+    {
+        $GLOBALS['sortArtworkColumn'] = 2;
+        $_POST['sortArtworkColumn'] = 2;
+        if ($_POST['sortArtworkType'] == "DESC")
+        {
+            $GLOBALS['sortArtworkType'] = "ASC";
+        }
+        else
+        {
+            $GLOBALS['sortArtworkType'] = "DESC";
+        }
+        $_POST['sortArtworkType'] = $GLOBALS['sortArtworkType'];
+    }
+
     function printVisits()
     {
         $connection = new Database();
@@ -53,7 +89,7 @@
             ON a.ArtID=v.ArtID
             WHERE a.MuseumID='".$GLOBALS['museumID']."'
             GROUP BY Date
-            ORDER BY ".$GLOBALS['visitsSortColumn']." ".$GLOBALS['sortVisitsType']."";
+            ORDER BY ".$GLOBALS['sortVisitsColumn']." ".$GLOBALS['sortVisitsType'];
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
@@ -75,7 +111,7 @@
             ON a.ArtID=v.ArtID
             WHERE a.MuseumID='".$GLOBALS['museumID']."'
             GROUP BY v.ArtID
-            ORDER BY Visits DESC";
+            ORDER BY ".$GLOBALS['sortArtworkColumn']." ".$GLOBALS['sortArtworkType'];
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
@@ -90,7 +126,7 @@
 
 Visits by day:<br>
 <form name="visitsDay" action="" method="post">
-    <input type="hidden" name="sortVisitsColumn" value="<?php echo $GLOBALS['visitsSortColumn'] ?>"/>
+    <input type="hidden" name="sortVisitsColumn" value="<?php echo $GLOBALS['sortVisitsColumn'] ?>"/>
     <input type="hidden" name="sortVisitsType" value="<?php echo $GLOBALS['sortVisitsType'] ?>"/>
     <table>
         <tr>
@@ -104,13 +140,17 @@ Visits by day:<br>
 <br>
 
 Visits by artwork:<br>
-<table>
-    <tr>
-        <th>Artwork</th>
-        <th>Visits</th>
-    </tr>
-    <?php printArtworkVisits()?>
-</table>
+<form name="visitsArtwork" action="" method="post">
+    <input type="hidden" name="sortArtworkColumn" value="<?php echo $GLOBALS['sortArtworkColumn'] ?>"/>
+    <input type="hidden" name="sortArtworkType" value="<?php echo $GLOBALS['sortArtworkType'] ?>"/>
+    <table>
+        <tr>
+            <th><input name="artworkSort" type="submit" value="Artwork"/></th>
+            <th><input name="visit2Sort" type="submit" value="Visits"/></th>
+        </tr>
+        <?php printArtworkVisits()?>
+    </table>
+</form>
 
 <?php
     require "./footer.php";
