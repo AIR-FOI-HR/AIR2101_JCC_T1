@@ -120,13 +120,13 @@
     </select><br>
 
     <label for="description">Description: </label>
-    <input id="description" name="description" type="text" placeholder="Description" value="<?php if (!empty($_POST['description'])) echo $_POST['description'] ?>"/><br>
+    <textarea id="description" name="description" rows="10" cols="60" maxlength="255" placeholder="Description"><?php if (!empty($_POST['description'])) echo $_POST['description'] ?></textarea><br>
 
     <label for="photo">Photo: </label>
     <input type='file' name="photo"/>
     <input type='hidden' name='MAX_FILE_SIZE' value='3000000'/><br>
 
-    <label for="photoname">Name: </label>
+    <label for="photoname">Photo name: </label>
     <input id="photoname" name="photoname" type="text" placeholder="Photo name" value="<?php if (!empty($_POST['photoname'])) echo $_POST['photoname'] ?>"/><br>
 
     <input name="submit" type="submit" value="Add artwork"/>
