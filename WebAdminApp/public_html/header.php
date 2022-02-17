@@ -17,8 +17,23 @@
         <nav>
             <ul>
                 <li><a href="./index.php">Index</a></li>
-                <li><a href="./login.php">Login</a></li>
-                <li><a href="./artwork.php">Artwork</a></li>
-                <li><a href="./museummanagement.php">Museum Management</a></li>
+                <?php
+                    if (!empty($user))
+                    {
+                        echo "<li><a href=\"./login.php\">Logout</a></li>";
+                        if ($user[Session::ROLE] <= 2) 
+                        {
+                            echo "<li><a href=\"./artwork.php\">Artwork</a></li>";
+                        }
+                        if ($user[Session::ROLE] == 1)
+                        {
+                            echo "<li><a href=\"./museummanagement.php\">Museum Management</a></li>";
+                        }
+                    }
+                    else
+                    {
+                        echo "<li><a href=\"./login.php\">Login</a></li>";
+                    }
+                ?>
             </ul>
         </nav>

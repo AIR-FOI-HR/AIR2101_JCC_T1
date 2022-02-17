@@ -4,6 +4,12 @@
     require "./header.php";
     $error = "";
 
+    if (!empty($user))
+    {
+        Session::deleteSession();
+        header("Location: ./login.php");
+    }
+
     if (isset($_POST['submit']))
     {
         $email = $_POST['email'];
@@ -20,6 +26,21 @@
         if ($row)
         {
             if ($row['RoleID'] == 1)
+            {
+                Session::createUser($row['Name'], $row['RoleID'], $row['UserID'], $row['MuseumID']);
+                header("Location: ./index.php");
+            }
+        }
+
+        $query = "SELECT * FROM `curator` c,`user` u 
+        WHERE u.Email='{$email}' 
+        AND u.Password='{$password}'
+        AND c.UserID = u.UserID";
+        $result = $connection->selectDB($query);
+        $row = mysqli_fetch_array($result);
+        if ($row)
+        {
+            if ($row['RoleID'] == 2)
             {
                 Session::createUser($row['Name'], $row['RoleID'], $row['UserID'], $row['MuseumID']);
                 header("Location: ./index.php");
