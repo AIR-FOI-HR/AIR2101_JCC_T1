@@ -8,6 +8,7 @@
         header("Location: ./login.php");
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
+    $GLOBALS['pageSize'] = 10;
 
     //visits by day sorting and filtering
     $GLOBALS['sortVisitsColumn'] = isset($_POST['sortVisitsColumn']) ? $_POST['sortVisitsColumn'] : 1;
@@ -91,12 +92,43 @@
             GROUP BY Date
             ORDER BY ".$GLOBALS['sortVisitsColumn']." ".$GLOBALS['sortVisitsType'];
         $result = $connection->selectDB($query);
+
+        $maxPages = ceil($result->num_rows/$GLOBALS['pageSize']);
+        $GLOBALS['maxPages'] = $maxPages;
+        if (isset($_POST['firstPage']))
+        {
+            $_POST['page'] = 1;
+            $GLOBALS['page'] = $_POST['page'];
+        }
+        if (isset($_POST['previousPage']))
+        {
+            if ($_POST['page'] > 1)
+                $_POST['page'] -= 1;
+            $GLOBALS['page'] = $_POST['page'];
+        }
+        if (isset($_POST['nextPage']))
+        {
+            if ($_POST['page'] < $GLOBALS['maxPages'])
+                $_POST['page'] += 1;
+            $GLOBALS['page'] = $_POST['page'];
+        }
+        if (isset($_POST['lastPage']))
+        {
+            $_POST['page'] = $GLOBALS['maxPages'];
+            $GLOBALS['page'] = $_POST['page'];
+        }
+        $i=0;
+        $page = isset($_POST['page']) ? $_POST['page'] : 1;
         while ($row = mysqli_fetch_array($result))
         {
-            echo "<tr>
-                <td>".$row['Date']."</td>
-                <td>".$row['Visits']."</td>
-            </tr>";
+            if ($row && $i>=$GLOBALS['pageSize']*($page-1) && $i<$GLOBALS['pageSize']*($page-1)+$GLOBALS['pageSize'])
+            {
+                echo "<tr>
+                    <td>".$row['Date']."</td>
+                    <td>".$row['Visits']."</td>
+                </tr>";
+            }
+            $i++;
         }
         $connection->closeDB();
     }
@@ -146,6 +178,14 @@ Visits by day:<br>
         </tr>
         <?php printVisits()?>
     </table>
+    <br>
+    <input name="firstPage" type="submit" value="First page"/>
+    <input name="previousPage" type="submit" value="Previous page"/>
+
+    <input name="page" type="number" min="1" max="<?php if(isset($GLOBALS['maxPages'])) echo $GLOBALS['maxPages'] ?>" value="<?php echo isset($_POST['page']) ? $_POST['page'] : 1 ?>"/>
+
+    <input name="nextPage" type="submit" value="Next page"/>
+    <input name="lastPage" type="submit" value="Last page"/>
 </form>
 
 <br>
