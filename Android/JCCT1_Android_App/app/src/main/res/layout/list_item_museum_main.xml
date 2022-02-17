@@ -10,7 +10,8 @@
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="5dp"
-    android:foreground="?android:selectableItemBackground">
+    android:foreground="?android:selectableItemBackground"
+    >
 
     <LinearLayout
         android:orientation="vertical"

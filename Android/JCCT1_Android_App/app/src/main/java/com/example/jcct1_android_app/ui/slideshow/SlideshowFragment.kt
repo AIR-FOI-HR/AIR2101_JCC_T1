@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.all.entities.entities.Museum
 import com.example.jcct1_android_app.R
@@ -19,11 +21,13 @@ import com.example.jcct1_android_app.recyclerview.MuseumParent
 import com.example.jcct1_android_app.recyclerview.MuseumRecyclerAdapter
 import com.example.jcct1_android_app.repository.DataRepository
 import com.example.jcct1_android_app.repository.LoadMuseumDataListener
+import com.example.jcct1_android_app.ui.museumNavigation.MuseumNavigationFragment
 
 class SlideshowFragment : Fragment(), LoadMuseumDataListener {
 
     var museumTitle: TextView? = null
     var museumDesc: TextView? = null
+    var museumNavButton: Button? = null
     private var dataReadyFlag: Boolean = false
     private var viewReadyFlag: Boolean = false
     private lateinit var slideshowViewModel: SlideshowViewModel
@@ -86,7 +90,16 @@ class SlideshowFragment : Fragment(), LoadMuseumDataListener {
                 museumDesc = binding.descriptionText
                 museumDesc?.text = museum?.Layout + museum?.Email + "bla"
 
+                museumNavButton = binding.museumNavigation
+                museumNavButton?.setOnClickListener(){
 
+                    val controller = Navigation.findNavController(requireView())
+                    controller.navigate(R.id.nav_innerMuseum)
+                   // supportFragmentManager
+                   // val fragmentManager: FragmentTransaction
+
+
+                }
             }
         }
     }
