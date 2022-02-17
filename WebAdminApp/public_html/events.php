@@ -9,51 +9,49 @@
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
 
-    function printArtwork()
+    function printEvents()
     {
         $connection = new Database();
         $connection->connectDB();
         $query = "SELECT * 
-            FROM `art` 
+            FROM `event` 
             WHERE MuseumID=".$GLOBALS['museumID'];
         $result = $connection->selectDB($query);
         while ($row = mysqli_fetch_array($result))
         {
-            $arttype = "";
+            $curator = "";
 
             $query = "SELECT *
-                FROM `arttype` 
-                WHERE ArtTypeID=".$row['ArtTypeID'];
+                FROM `user` 
+                WHERE UserID=".$row['UserID'];
             $result2 = $connection->selectDB($query);
             $row2 = mysqli_fetch_array($result2);
-            if ($row2) $arttype=$row2['Name'];
+            if ($row2) $curator=$row2['Name'];
 
             echo "<tr>
                 <td>".$row['Name']."</td>
-                <td>".$row['Author']."</td>
-                <td>".$arttype."</td>
-                <td>".$row['Description']."</td>
-                <td><img/ width=\"200\" height=\"200\" src=\"./images/".$row['Photo']."\"></td>
-                <td><a href=\"./newartwork.php?id=".$row['ArtID']."\">Update</a></td>
-                <td><a href=\"./deleteartwork.php?id=".$row['ArtID']."\">Delete</a></td>
+                <td>".$row['Date']."</td>
+                <td>".$row['Time']."</td>
+                <td>".$curator."</td>
+                <td><a href=\"./newevent.php?id=".$row['EventID']."\">Update</a></td>
+                <td><a href=\"./deleteevent.php?id=".$row['EventID']."\">Delete</a></td>
             </tr>";
         }
         $connection->closeDB();
     }
 ?>
 
-<a href="./newartwork.php">New artwork</a>
+<a href="./newevent.php">New event</a>
 <table>
     <tr>
         <th>Name</th>
-        <th>Author</th>
-        <th>Art Type</th>
-        <th>Description</th>
-        <th>Photo</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Added by</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    <?php printArtwork()?>
+    <?php printEvents()?>
 </table>
 
 <?php

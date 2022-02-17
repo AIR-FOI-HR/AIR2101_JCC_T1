@@ -24,6 +24,7 @@
                         if ($user[Session::ROLE] <= 2) 
                         {
                             echo "<li><a href=\"./artwork.php\">Artwork</a></li>";
+                            echo "<li><a href=\"./events.php\">Events</a></li>";
                         }
                         if ($user[Session::ROLE] == 1)
                         {
