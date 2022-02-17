@@ -24,6 +24,21 @@
                 Session::createUser($row['Name'], $row['RoleID'], $row['UserID'], $row['MuseumID']);
                 header("Location: ./index.php");
             }
+        }
+
+        $query = "SELECT * FROM `curator` c,`user` u 
+        WHERE u.Email='{$email}' 
+        AND u.Password='{$password}'
+        AND c.UserID = u.UserID";
+        $result = $connection->selectDB($query);
+        $row = mysqli_fetch_array($result);
+        if ($row)
+        {
+            if ($row['RoleID'] == 2)
+            {
+                Session::createUser($row['Name'], $row['RoleID'], $row['UserID'], $row['MuseumID']);
+                header("Location: ./index.php");
+            }
             else
             {
                 $error = "Wrong e-mail or password";
