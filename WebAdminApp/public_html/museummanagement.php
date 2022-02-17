@@ -8,6 +8,7 @@
         header("Location: ./login.php");
     }
     $GLOBALS['museumID'] = $user[Session::MUSEUM];
+    $GLOBALS['userID'] = $user[Session::ID];
 
     function printMuseumDetails()
     {
@@ -59,6 +60,47 @@
         }
         $connection->closeDB();
     }
+    function printMuseumAdmins()
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+        FROM `admin` a
+        LEFT JOIN `user` u 
+        ON u.UserID = a.UserID
+        WHERE a.MuseumID = ".$GLOBALS['museumID'];
+        $result = $connection->selectDB($query);
+        while ($row = mysqli_fetch_array($result))
+        {
+            if ($row['UserID'] != $GLOBALS['userID'])
+            {
+                echo "<tr>
+                    <td>".$row['Name']."</td>
+                    <td>".$row['Email']."</td>
+                    <td>".$row['RegistrationDate']."</td>
+                    <td><a href=\"./deleteadmin.php?id=".$row['UserID']."&admin=1\">Remove</a></td>";
+            }
+        }
+    }
+    function printMuseumCurators()
+    {
+        $connection = new Database();
+        $connection->connectDB();
+        $query = "SELECT * 
+        FROM `curator` c
+        LEFT JOIN `user` u 
+        ON u.UserID = c.UserID
+        WHERE c.MuseumID = ".$GLOBALS['museumID'];
+        $result = $connection->selectDB($query);
+        while ($row = mysqli_fetch_array($result))
+        {
+            echo "<tr>
+                <td>".$row['Name']."</td>
+                <td>".$row['Email']."</td>
+                <td>".$row['RegistrationDate']."</td>
+                <td><a href=\"./deleteadmin.php?id=".$row['UserID']."&admin=0\">Remove</a></td>";
+        }
+    }
 ?>
 
 Museum:<br>
@@ -75,6 +117,32 @@ Museum:<br>
         <th>Delete</th>
     </tr>
     <?php printIoTComponents()?>
+</table>
+
+<br>
+<a href="./newadmin.php?admin=1">New Admin</a>
+Admins:
+<table>
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Registration Date</th>
+        <th>Remove</th>
+    </tr>
+    <?php printMuseumAdmins()?>
+</table>
+
+<br>
+<a href="./newadmin.php?admin=0">New Curator</a>
+Curators:
+<table>
+    <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Registration Date</th>
+        <th>Remove</th>
+    </tr>
+    <?php printMuseumCurators()?>
 </table>
 
 <?php
